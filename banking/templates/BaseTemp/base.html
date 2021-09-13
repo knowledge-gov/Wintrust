@@ -1,0 +1,388 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>WinTrust Community Bank Dashboard</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <!-- Meta -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      
+      <!-- Favicon icon -->
+      <link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="{% static 'assets/pages/waves/css/waves.min.css' %}" type="text/css" media="all">
+    <link rel="stylesheet" href="{% static 'dashboard/go2bank.css' %}" type="text/css" media="all">
+    <!-- Required Fremwork -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap/css/bootstrap.min.css' %}">
+      <!-- waves.css -->
+      <link rel="stylesheet" href="{% static 'assets/pages/waves/css/waves.min.css' %}" type="text/css" media="all">
+      <!-- themify icon -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/themify-icons/themify-icons.css'%}">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/icon/font-awesome/css/font-awesome.min.css'%}">
+      <!-- scrollbar.css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.mCustomScrollbar.css' %}">
+        <!-- am chart export.css -->
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+      <!-- Style.css -->
+      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+  </head>
+
+  <body>
+  <!-- Pre-loader start -->
+  <div class="theme-loader">
+      <div class="loader-track">
+          <div class="preloader-wrapper">
+              <div class="spinner-layer spinner-blue">
+                  <div class="circle-clipper left">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                      <div class="circle"></div>
+                  </div>
+              </div>
+              <div class="spinner-layer spinner-red">
+                  <div class="circle-clipper left">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                      <div class="circle"></div>
+                  </div>
+              </div>
+            
+              <div class="spinner-layer spinner-yellow">
+                  <div class="circle-clipper left">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                      <div class="circle"></div>
+                  </div>
+              </div>
+            
+              <div class="spinner-layer spinner-green">
+                  <div class="circle-clipper left">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="gap-patch">
+                      <div class="circle"></div>
+                  </div>
+                  <div class="circle-clipper right">
+                      <div class="circle"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Pre-loader end -->
+  <div id="pcoded" class="pcoded">
+      <div class="pcoded-overlay-box"></div>
+      <div class="pcoded-container navbar-wrapper">
+          <nav class="navbar header-navbar pcoded-header">
+              <div class="navbar-wrapper">
+                  <div class="navbar-logo">
+                      <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
+                          <i class="ti-menu"></i>
+                      </a>
+                      <div class="mobile-search waves-effect waves-light">
+                          <div class="header-search">
+                              <div class="main-search morphsearch-search">
+                                  <div class="input-group">
+                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                      <input type="text" class="form-control" placeholder="Enter Keyword">
+                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <a href="{% url 'dashboard' %}">
+                          <img class="img-fluid" src="{% static 'home_files/Wintrust.png' %}" alt="Theme-Logo" />
+                          
+                      </a>
+                      <span style="margin-right: 40px;"></span>
+                      <a class="mobile-options waves-effect waves-light">
+                          <i class="ti-more"></i>
+                      </a>
+                  </div>
+                
+                  <div class="navbar-container container-fluid">
+                      <ul class="nav-left">
+                          <li>
+                              <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
+                          </li>
+                          <li class="header-search">
+                              <div class="main-search morphsearch-search">
+                                  <div class="input-group">
+                                      <span class="input-group-addon search-close"><i class="ti-close"></i></span>
+                                      <input type="text" class="form-control">
+                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                                  <i class="ti-fullscreen"></i>
+                              </a>
+                          </li>
+                      </ul>
+                      <ul class="nav-right"></ul>
+                          
+                      </ul>
+                  </div>
+              </div>
+          </nav>
+
+          <div class="pcoded-main-container">
+              <div class="pcoded-wrapper">
+                  <nav class="pcoded-navbar">
+                      <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                      <div class="pcoded-inner-navbar main-menu">
+                          <div class="">
+                              <div class="main-menu-header">
+                                  <img class="img-80 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
+                                  <div class="user-details">
+                                      {%for user in context%}
+                                      <span id="more-details">{{user.first_name}} &nbsp; {{user.last_name}} <i class="fa fa-caret-down"></i></span>
+                                      {{user.userid}}
+                                      {% endfor %}  
+                                    </div>
+                              </div>
+        
+                              <div class="main-menu-content">
+                                  <ul>
+                                      <li class="more-details">
+                                          <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
+                                          <a href="#!"><i class="ti-settings"></i>Settings</a>
+                                          <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation"></div>
+                          <ul class="pcoded-item pcoded-left-item">
+                              <li class="active">
+                                  <a href="{% url 'dashboard' %}" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                           </ul>
+
+
+                            
+                         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">ACCOUNTS</div>
+                            
+                         <ul class="pcoded-item pcoded-left-item">
+                            
+                                <li class="active">
+                                    <a href="{% url 'dashboard' %}" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="fa fa-home fa-lg"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bank account &nbsp; *7762</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+
+
+                        <div class="pcoded-navigation-label" data-i18n="nav.category.forms">MOVE MONEY</div>
+                          <ul class="pcoded-item pcoded-left-item">
+                              <li>
+                                  <a href="form-elements-component.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">ASAP Direct Deposit</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="{% url 'transfer'%}" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bank transfer</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Link Debit Card</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Deposit Cash</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                             </li>
+
+        
+                          </ul>
+
+
+                            
+
+
+                          
+        
+                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Others</div>
+                          <ul class="pcoded-item pcoded-left-item">
+                              <li>
+                                  <a href="chart.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Help</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="map-google.html" class="waves-effect waves-dark">
+                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Settings</span>
+                                      <span class="pcoded-mcaret"></span>
+                                  </a>
+                              </li>
+
+                              <li>
+                                <a href="map-google.html" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Log Out</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+        
+                          </ul>
+        
+                         
+                      </div>
+                  </nav>
+                  <div class="pcoded-content">
+                      <!-- Page-header start -->
+                      
+                      <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                
+                                            {% block content %}
+                                            
+                                            {% endblock %}
+                                        
+                                        
+                                <div id="styleSelector"> </div>
+                            </div>
+
+                            
+                            <div class="col-md-12 text-center w3-opacity-min" style="margin-top: 60px;">
+                                <p class="font-style-content6  w3-small">Cards issued by WinTrust, Member FDIC, pursuant to a license from Visa U.S.A., Inc. Visa is a registered trademark of Visa International Service Association.</p>
+                                <p class="font-style-content6 w3-small">Neither WinTrust, Visa U.S.A. nor any of their respective affiliates are responsible for the products or services provided by Ingo Money, Q2 Software, Plaid, or any eGift Card merchants. Partner terms and conditions apply.</p>
+                                <p class="font-style-content6 w3-small">All third-party names and logos are trademarks of their respective owners. These owners are not affiliated with WinTrust and have not sponsored or endorsed WinTrust products or services.</p>
+                                <p class="font-style-content6 w3-small">Apple, the Apple logo, and iPhone are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
+                                <p class="font-style-content6 w3-small">Google, Android and Google Play are trademarks of Google Inc., registered in the U.S. and other countries.</p></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
+    <div class="ie-warning">
+        <h1>Warning!!</h1>
+        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+        <div class="iew-container">
+            <ul class="iew-download">
+                <li>
+                    <a href="http://www.google.com/chrome/">
+                        <img src="assets/images/browser/chrome.png" alt="Chrome">
+                        <div>Chrome</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.mozilla.org/en-US/firefox/new/">
+                        <img src="assets/images/browser/firefox.png" alt="Firefox">
+                        <div>Firefox</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.opera.com">
+                        <img src="assets/images/browser/opera.png" alt="Opera">
+                        <div>Opera</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.apple.com/safari/">
+                        <img src="assets/images/browser/safari.png" alt="Safari">
+                        <div>Safari</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                        <img src="assets/images/browser/ie.png" alt="">
+                        <div>IE (9 & above)</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <p>Sorry for the inconvenience!</p>
+    </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+    
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="{% static 'assets/js/jquery/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/js/jquery-ui/jquery-ui.min.js ' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/js/popper.js/popper.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'assets/js/bootstrap/js/bootstrap.min.js'%} "></script>
+    <script type="text/javascript" src="{% static 'assets/pages/widget/excanvas.js '%}"></script>
+    <!-- waves js -->
+    <script src="{% static 'assets/pages/waves/js/waves.min.js' %}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="{% static 'assets/js/jquery-slimscroll/jquery.slimscroll.js' %} "></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{% static 'assets/js/modernizr/modernizr.js ' %}"></script>
+    <!-- slimscroll js -->
+    <script type="text/javascript" src="{% static 'assets/js/SmoothScroll.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.mCustomScrollbar.concat.min.js' %} "></script>
+    <!-- Chart js -->
+    <script type="text/javascript" src="{% static 'assets/js/chart.js/Chart.js' %}"></script>
+    <!-- amchart js -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="{% static 'assets/pages/widget/amchart/gauge.js' %}"></script>
+    <script src="{% static 'assets/pages/widget/amchart/serial.js' %}"></script>
+    <script src="{% static 'assets/pages/widget/amchart/light.js' %}"></script>
+    <script src="{% static 'assets/pages/widget/amchart/pie.min.js' %}"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <!--Accodion-->
+    <script type="text/javascript" src="{% static 'assets/pages/accordion/accordion.js' %}"></script>
+    <!-- menu js -->
+    <script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+    <script src="{% static 'assets/js/vertical-layout.min.js' %} "></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="{% static 'assets/pages/dashboard/custom-dashboard.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/js/script.js'%} "></script>
+</body>
+
+</html>

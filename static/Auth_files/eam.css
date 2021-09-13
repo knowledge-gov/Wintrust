@@ -1,0 +1,396 @@
+﻿header {
+	width: 100%;
+	height: 3rem;
+	background: #FFF;
+	border-bottom: 0.0625rem solid #AAA;
+	box-shadow: 0.0625rem 0.0625rem .125rem .125rem #999;
+}
+
+body {
+    background-color: #DDD;
+    color: #464646;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
+}
+.sr-only-focusable:active, .sr-only-focusable:focus {
+    padding: 0.3125rem;
+    position:absolute;
+}
+.form-control-label {
+    font-size: 1rem;
+    color: #777363;
+}
+
+.break-all {
+    word-break: break-all;
+    -ms-word-break: break-all;
+}
+.dialogInputText, .form-control-value {
+    font-size: 1rem;
+    color: #222222;
+}
+.dialogInputText input[type="radio"] {
+        float: left; 
+        height: 1.5rem;
+}
+.dialogInputText label {
+    margin-left: 1.125rem; 
+    display: block;
+}
+
+.text-danger {
+    color: #990000 !important;
+    font-size: 0.875rem;
+    margin-top: 0.3125rem;
+}
+.form-group {
+    margin-top: 1.250rem;
+    margin-bottom: 1.250rem;
+}
+.row {
+    margin-bottom: 1.250rem;
+}
+.row-sm {
+    margin-bottom: 0.625rem;
+}
+.row-sm .row {
+    margin-bottom: 0;
+}
+
+.nopad {
+    padding: 0;
+}
+
+.modal-body {
+    padding: 1.25rem 1rem;
+}
+.modal-body .row:last-of-type { margin-bottom: 0; }
+.modal-footer { border-top: 0; padding: 0rem 1rem; }
+.modal-footer .container { box-shadow: none; padding: 0; }
+
+/*
+    Below is sample style to override the Hero image. This should go in BankStyles.css                     
+    body {
+        background-color: transparent;
+        background-image: url('/Eam/Content/Images/login-bkgd.jpg');
+    }
+*/
+
+body {
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+hr {
+	color: #e4e4e4;
+}
+
+h1 {
+    font-size: 1.25rem;
+    color: #0265ba;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-size: 1rem;
+    padding-bottom: 0.75rem;
+    color: #0265ba;
+}
+h5 {
+    font-size: 1.125rem;
+    color: #0265ba;
+    margin-bottom: 0;
+}
+p {
+    margin-bottom: 1.25rem;
+}
+a {
+    color: #2a5db0;
+}
+a:visited {
+    color: #3888bc;
+}
+
+.logo {
+    height: 1.75rem;
+    vertical-align:middle;
+    vertical-align:-webkit-baseline-middle;
+}
+
+.fis-fieldnote {
+    font-size: 0.875rem;
+}
+    .fis-fieldnote.radio,
+    .fis-fieldnote.checkbox {
+        margin-left: 1.125rem;
+    }
+
+div:empty:not(.modal-backdrop) {
+	display: none;
+}
+
+.fis-pinpoint {
+	margin: inherit;
+	margin-left: auto;
+	margin-right: auto;
+    margin-bottom: 1.875rem;
+	
+	background-color: transparent;
+}
+
+.fis-pinpoint > img {
+	width: 100%;
+}
+ .fis-pinpoint > iframe {
+    width: 100%;
+ }
+
+.fis-product-name {
+	color: #0265ba;
+	white-space: nowrap;
+}
+
+.productName {
+	color: #0265ba;
+	white-space: nowrap;
+}
+
+.fis-header-content {
+	margin: inherit;
+	margin-left: auto;
+	margin-right: auto;
+	height: 100%;
+}
+
+.fis-page-content {
+	width: inherit;
+	margin-left: initial;
+	margin-right: initial;
+	padding-bottom: 0.5em;
+	background-color: transparent;
+}
+
+.container{
+    border-radius: 0.125rem;
+	background-color: white;
+	padding-top: 1.875rem;
+	padding-bottom: 1.875rem;
+    box-shadow: 0 0.0625rem 0.1825rem 0 rgba(0,0,0,.2), 0 0.0625rem 0.0625rem 0 rgba(0,0,0,.14), 0 0.125rem 0.0625rem -0.0625rem rgba(0,0,0,.12); 
+}
+
+div.row.navigation p:last-child{
+	margin-bottom: 0;
+}
+
+.fis-threatmetrix-profile {
+	right:0;
+	bottom:0;
+	position:fixed;
+}
+
+[class^="fis-banner"] [class^="icon-"], [class^="fis-banner"]  [class*=" icon-"] {
+    padding-right : 0.5em;
+}
+
+/*Check the Bootstrap border-danger class*/
+.fis-banner-danger {
+    margin-bottom: 1.25rem;
+    color: #990000;
+    padding: 0.25rem 0rem;
+    border-top: .0625rem solid #990000;
+    border-bottom: .0625rem solid #990000;
+    font-size: 0.875rem;
+}
+    .fis-banner-danger span.message {
+        color: #990000;
+        font-weight: bold;
+    }
+
+.fis-banner-notice {
+    margin-bottom: 1.25rem;
+    color: #005F83;
+    padding: 0.25rem 0rem;
+    border-top: .0625rem solid #005F83;
+    border-bottom: .0625rem solid #005F83;
+    font-size: .875rem;
+}
+    .fis-banner-notice span.message {
+        color: #464646;
+        font-weight: bold;
+    }
+
+.fis-banner-confirmation {
+    margin-bottom: 1.25rem;
+    color: #8dc63f;
+    padding: 0.25rem 0rem;
+    border-top: .0625rem solid #8dc63f;
+    border-bottom: .0625rem solid #8dc63f;
+    font-size: .875rem;
+}
+    .fis-banner-confirmation span.message {
+        color: #464646;
+        font-weight: bold;
+    }
+
+@media (min-width: 34.5625rem) {
+
+    .fis-pinpoint {
+        max-width: 32rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+	.fis-page-content {
+		margin: inherit;
+		margin-left: auto;
+		margin-right: auto;
+		max-width:  32rem;
+		padding-top: 1.875rem;
+	}
+	.fis-header-content {
+		max-width:  32rem;
+	}
+
+    header,
+    .container {
+        width: 100%;
+        padding-right: 2.1875rem;
+        padding-left: 2.1875rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .fis-ooba-shield::after {
+        content: url('https://cibng.ibanking-services.com/eAM/Styles/Default/shield_FINAL.gif');
+    }
+
+	/* Large screen Bootstrap overrrides*/
+	.btn {
+		width: 100%;
+		padding-top: 0.375rem;
+		padding-bottom: 0.375rem;
+        font-size: 0.875rem;
+	}
+	.col {
+		padding-left: 0.625rem;
+		padding-right: 0.625rem;
+	}
+    .btn-primary {
+        margin-bottom: 0.625rem;
+    }
+    .btn-secondary {
+        margin-bottom: 0;
+    }
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #333;
+        border-color: #333;
+    }
+    .btn-secondary:hover {
+        color: #fff;
+        background-color: #333;
+        border-color: #333;
+    }
+}
+@media screen and (max-width: 34.5rem) {
+    header, 
+    .container {
+        width: 100%;
+        padding-right: 0.625rem;
+        padding-left: 0.625rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .fis-pinpoint {
+        max-width: 32rem;
+    }
+
+    .fis-page-content {
+		margin: inherit;
+		margin-left: 1.25rem;
+		margin-right: 1.25rem;
+		max-width: 32rem;
+		padding-top: 1.875rem;
+	}
+    .btn {
+        width: 100%;
+	    margin-top: 0.3125rem;
+	    margin-bottom: 0.3125rem;
+	    padding-top: 0.375rem;
+	    padding-bottom: 0.375rem;
+        font-size: .875rem;
+    }
+    .fis-ooba-shield::after {
+        content: url('https://cibng.ibanking-services.com/eAM/Styles/Default/shield-small.gif');
+    }
+    .btn-primary:active {
+        color: #fff !important;
+        background-color: #333 !important;
+        border-color: #333 !important;
+    }
+    .btn-secondary:active {
+        color: #fff !important;
+        background-color: #333 !important;
+        border-color: #333 !important;
+    }
+}
+@media screen and (min-width: 576px) {
+  .btn-primary {
+    margin-bottom: 0;
+  }
+}
+.modal-dialog {
+    margin-top:3rem;
+}
+
+
+/* Small screen Bootstrap overrrides*/
+
+.btn-primary{
+    background-color: #0265ba;
+    border-color: #0265ba;
+}
+
+.btn-secondary {
+    color: #0265ba;
+    background-color: #fff;
+    border-color: #0265ba;
+}
+
+.modal-header {
+    padding: 0.78125rem 1rem;
+}
+.modal-body-shim {
+    flex: unset;
+}
+
+.fis-footer-note {
+    /*border-top: 0.0625rem solid #CCC;*/
+}
+.workspaceSubHeader {
+    margin-bottom: 1.250rem;
+    color: #0265ba;
+    font-size: 1rem;
+}
+.securityCodeText {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+#progressbar span{
+    margin-left: 0.75rem;
+}
+
+@media screen and (min-width: 1024px) {
+    .media-1024x171.seg-invo {
+        padding-bottom: 16.70% !important;
+        height: 0 !important;
+    }
+}
