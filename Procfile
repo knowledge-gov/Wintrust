@@ -1,1 +1,1 @@
-web: gunicorn wintrust.wsgi --log-file-
+web: gunicorn wintrust.wsgi --log-file -
