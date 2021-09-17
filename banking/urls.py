@@ -5,8 +5,9 @@ from . import views
 
 urlpatterns=[
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboardHome/', views.dash, name='dash'),
     path('transfer/',views.transfer, name = 'transfer'),
-    path('beneficiary/', views.beneficiary, name= 'add_beneficiary'),
+    path('processtransfer/', views.beneficiary, name= 'add_beneficiary'),
     path('auth/',views.auth,name='auth'),
     path(r'',views.index2,name = 'banking')
 ]

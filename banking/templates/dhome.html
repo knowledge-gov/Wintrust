@@ -1,6 +1,15 @@
 {% extends './BaseTemp/base.html' %}
-
+{% load static %}
+{% block activeurlH %}
+    active
+{% endblock %}
 {% block content %}
+
+
+
+{% for user in context.row_data%}
+        
+
 
 <div class="page-wrapper">
                                     
@@ -11,8 +20,8 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-header-text">Account Number: *5645</h5>
-                        <p style="float: right;">Available Balance : <span><strong>$80,000.00</strong></span></p>
+                        <h5 class="card-header-text">Account Number: {{user.account_No}} </h5>
+                        <p style="float: right;">Available Balance : <span><strong>${{user.balance}}</strong></span></p>
 
                     </div>
                     <div class="card-block accordion-block">
@@ -110,5 +119,5 @@
 </div>
 <!-- Page-body end -->
 </div>
-
+{%endfor%}
 {%endblock%}

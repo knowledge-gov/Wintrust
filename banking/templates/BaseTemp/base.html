@@ -1,4 +1,6 @@
 {% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,6 +43,7 @@
   </head>
 
   <body>
+    
   <!-- Pre-loader start -->
   <div class="theme-loader">
       <div class="loader-track">
@@ -115,6 +118,7 @@
                               </div>
                           </div>
                       </div>
+                      
                       <a href="{% url 'dashboard' %}">
                           <img class="img-fluid" src="{% static 'home_files/Wintrust.png' %}" alt="Theme-Logo" />
                           
@@ -151,81 +155,80 @@
                   </div>
               </div>
           </nav>
-
+          
+          {%for user in context.row_data %}
+          
           <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                   <nav class="pcoded-navbar">
                       <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
                       <div class="pcoded-inner-navbar main-menu">
                           <div class="">
+
                               <div class="main-menu-header">
                                   <img class="img-80 img-radius" src="{% static 'assets/images/avatar-4.jpg' %}" alt="User-Profile-Image">
                                   <div class="user-details">
-                                      {%for user in context%}
+                                      
                                       <span id="more-details">{{user.first_name}} &nbsp; {{user.last_name}} <i class="fa fa-caret-down"></i></span>
-                                      {{user.userid}}
-                                      {% endfor %}  
+                                       
                                     </div>
                               </div>
         
                               <div class="main-menu-content">
                                   <ul>
                                       <li class="more-details">
-                                          <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
-                                          <a href="#!"><i class="ti-settings"></i>Settings</a>
+                                         <!-- <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
+                                          <a href="#!"><i class="ti-settings"></i>Settings</a>-->
                                           <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                       </li>
                                   </ul>
                               </div>
                           </div>
-                          
-                          <div class="pcoded-navigation-label" data-i18n="nav.category.navigation"></div>
-                          <ul class="pcoded-item pcoded-left-item">
-                              <li class="active">
-                                  <a href="{% url 'dashboard' %}" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
-                           </ul>
-
-
+                              
+                            <div class="pcoded-navigation-label" data-i18n="nav.category.navigation"></div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="active" class="waves-effect waves-dark">
+                                    <input type="hidden" name="userId" value="{{user.userid}}"/>
+                                        <a href="{% url 'dash'%}" class="waves-effect waves-dark" >
+                                            <span class="pcoded-micon w3-left-align"><i class="ti-home"></i><b>D</b></span>
+                                            <span class="pcoded-mtext w3-right-align" data-i18n="nav.dash.main">Home</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                </li>
+                            </ul>
+                          </form>
                             
+                          
                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">ACCOUNTS</div>
                             
                          <ul class="pcoded-item pcoded-left-item">
                             
-                                <li class="active">
-                                    <a href="{% url 'dashboard' %}" class="waves-effect waves-dark">
+                                <li class="{% block activeurlH %} {%endblock%}">
+                                    <a href="{% url 'dash' %}" class="waves-effect waves-dark">
                                         <span class="pcoded-micon"><i class="fa fa-home fa-lg"></i><b>FC</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bank account &nbsp; *7762</span>
-                                        <span class="pcoded-mcaret"></span>
+                                        <span class="" data-i18n="nav.form-components.main">Bank account &nbsp; <span class="w3-right"> {{user.account_No}} </span>   </span>
+                                        <span class="pcoded-mcaret"> </span>
                                     </a>
+                                    <br/>
                                 </li>
                             </ul>
 
 
                         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">MOVE MONEY</div>
                           <ul class="pcoded-item pcoded-left-item">
-                              <li>
+                             
+                                <li>
                                   <a href="form-elements-component.html" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">ASAP Direct Deposit</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                               </li>
-                              <li>
-                                  <a href="{% url 'transfer'%}" class="waves-effect waves-dark">
-                                      <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                      <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bank transfer</span>
-                                      <span class="pcoded-mcaret"></span>
-                                  </a>
-                              </li>
+
                               <li>
                                 <a href="bs-basic-table.html" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Link Debit Card</span>
+                                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Link Credit or Debit Card</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                               </li>
@@ -236,6 +239,18 @@
                                     <span class="pcoded-mcaret"></span>
                                 </a>
                              </li>
+
+                             
+                             
+                                 <li class="{% block activeurlT %} {%endblock%}">
+                                    <a href="{% url 'transfer'%}" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bank transfer</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                              
+                              
 
         
                           </ul>
@@ -248,7 +263,7 @@
         
                           <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Others</div>
                           <ul class="pcoded-item pcoded-left-item">
-                              <li>
+                              <!--<li>
                                   <a href="chart.html" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Help</span>
@@ -261,7 +276,7 @@
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">Settings</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li>
+                              </li>-->
 
                               <li>
                                 <a href="map-google.html" class="waves-effect waves-dark">
@@ -276,6 +291,7 @@
                          
                       </div>
                   </nav>
+                  {%endfor%}
                   <div class="pcoded-content">
                       <!-- Page-header start -->
                       
@@ -383,6 +399,11 @@
     <!-- custom js -->
     <script type="text/javascript" src="{% static 'assets/pages/dashboard/custom-dashboard.js' %}"></script>
     <script type="text/javascript" src="{% static 'assets/js/script.js'%} "></script>
+    <script>
+        function SubmitHome(){
+            document.getElementById("form1").submit();
+        } 
+    </script>
 </body>
 
 </html>

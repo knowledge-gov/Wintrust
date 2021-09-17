@@ -38,88 +38,142 @@ def auth(request):
     else:
         return render(request,'signin.html',{'error': 'The UserId supplied is not associated with any account.'})
 
- 
-
-#def dashboard(request):
-#    return render(request, 'dhome.html')
 
 
 def beneficiary(request):
     query = connection.cursor()
-    if  'type' in request.POST :
-        acctType = request.POST['type']
-        accountNo = request.POST['routineNo']
-        routineNo = request.POST['routineNo']
-        name = request.POST['name']
+    if 'user_id' in request.session:
+        if  'type' in request.POST :
+            acctType = request.POST['type']
+            accountNo = request.POST['routineNo']
+            routineNo = request.POST['routineNo']
+            name = request.POST['name']
+            amount = request.POST['amount']
+            userid = request.session['user_id']
+            
+            query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+            row = namedtuplefetchall(query)
+            if row:
+                for data in row:
+                    bal = data.balance
 
-        save_content = Beneficiary()
-        save_content.type = acctType
-        save_content.acct_no = accountNo
-        save_content.routine_no = routineNo
-        save_content.name = name
-        save_content.save()
+            n_bal =  float(bal) - float(amount)
+            Save = Transaction()
+            Save.transcation_type = 'Debit'
+            Save.amount = amount
+            Save.name = name
+            Save.prev_bal = bal
+            Save.bal = n_bal
+            Save.acct_no = accountNo
+            Save.routine_no = routineNo
+            Save.type = acctType
+            Save.user_id = userid
 
-        query.execute("SELECT name FROM banking_Beneficiary")
-        row = namedtuplefetchall(query)
+            Save.save()
 
-        return render(request, 'bankTransfer.html', {'context': row})
-    else:
-        holder = request.POST['holder']
-        amount = request.POST['amount']
-        userid = request.POST['userid']
-        
-        query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
-        row = namedtuplefetchall(query)
-        if row:
-            for data in row:
-                bal = data.balance
 
-        Save = Transaction()
-        Save.transcation_type = 'Debit'
-        Save.amount = amount
-        Save.name = holder
-        Save.prev_bal = bal
-        Save.bal = bal - amount
-        Save.save()
+            reg = Register.objects.get(userid = userid)
+            reg.balance = n_bal
+            reg.save()
 
-        return render(request, 'bankTransfer.html')
+            query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+            row = namedtuplefetchall(query)
+
+            #query.execute("UPDATE home_Register SET balance  = {} WHERE userid = {}".format([str(n_bal)],[userid]))
+
+            other=[
+                'Your Tranfer is under review, you will recieve an email once transaction is approved.'
+            ]
+            data={
+                    'row_data':row,
+                    'row':'',
+                    'other': other
+            }
+            return render(request, 'bankTransfer.html',{'context':data})
+    else : 
+        return render(request,'signin.html')
+
 
 
 def transfer(request):
     query = connection.cursor()
-    query.execute("SELECT name FROM banking_Beneficiary")
-    row = namedtuplefetchall(query)
+    if  'user_id' in request.session :
+        query = connection.cursor()
+        user = request.session['user_id']
+        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+        row_data = namedtuplefetchall(query)
 
-    return render(request, 'bankTransfer.html', {'context': row})
+        query.execute("SELECT name FROM banking_Beneficiary")
+        row = namedtuplefetchall(query)
+
+        data= {
+            'row_data': row_data,
+            'row': row
+        }
+
+        return render(request, 'bankTransfer.html', {'context': data})
+    else:
+        return render(request,'signin.html')
 
 
+
+def dash(request):
+    query = connection.cursor()
+    if  'user_id' in request.session :
+        user = request.session['user_id']
+        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+        row_data = namedtuplefetchall(query)
+
+        data={
+                'row_data':row_data,
+                'row':'',
+                'other':''
+
+        }
+
+        return render(request,'dhome.html',{'context': data })
+    else:
+        return render(request,'signin.html')
 
 
 def dashboard(request):
-    user = request.POST['userId']
-    otp = request.POST['otp']
+    if 'userId' in request.POST:
+        user = request.POST['userId']
+        otp = request.POST['otp']
 
-    query = connection.cursor()
-    query.execute("SELECT id FROM banking_Security WHERE otp = %s ", [otp])
-    row = namedtuplefetchall(query)
-    if row:
-        query.execute("DELETE FROM banking_Security")
-        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
-        row_data = namedtuplefetchall(query)
-        return render(request,'dhome.html',{'context': row_data })
-    else:
-        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+        query = connection.cursor()
+        query.execute("SELECT id FROM banking_Security WHERE otp = %s ", [otp])
         row = namedtuplefetchall(query)
-        error = [
-            'Invalid OTP'
-        ]
-        data = {
-            'row':row,
-            'error': error
-        }
-        return render(request,'Auth.html',{'context': data })
+        if row:
+            query.execute("DELETE FROM banking_Security")
+            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            row_data = namedtuplefetchall(query)
 
+            request.session['user_id'] = user
 
+            data={
+                'row_data':row_data,
+                'row':'',
+                'other':'active'
+
+            }
+
+            query.execute("DELETE FROM banking_Security")
+
+            return render(request,'dhome.html',{'context': data })
+        else:
+            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            row = namedtuplefetchall(query)
+            error = [
+                'Invalid OTP'
+            ]
+            data = {
+                'row':row,
+                'error': error
+            }
+            return render(request,'Auth.html',{'context': data })
+    else:
+        return render(request,'signin.html')
 
 
 def namedtuplefetchall(cursor):

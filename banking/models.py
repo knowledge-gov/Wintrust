@@ -18,6 +18,10 @@ class Transaction(models.Model):
     prev_bal =  models.CharField(max_length=255)
     bal = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
+    type = models.CharField(max_length=255)
+    acct_no = models.CharField(max_length=255)
+    routine_no = models.CharField(max_length=255)
+    user_id = models.CharField(max_length=255)
 
 
 
