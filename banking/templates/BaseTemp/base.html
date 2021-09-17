@@ -217,7 +217,7 @@
                         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">MOVE MONEY</div>
                           <ul class="pcoded-item pcoded-left-item">
                              
-                                <li>
+                                <li >
                                   <a href="form-elements-component.html" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">ASAP Direct Deposit</span>
@@ -225,8 +225,8 @@
                                   </a>
                               </li>
 
-                              <li>
-                                <a href="bs-basic-table.html" class="waves-effect waves-dark">
+                              <li class="{% block activeurlC %} {%endblock%}">
+                                <a href="{% url  'linkcard' %}" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Link Credit or Debit Card</span>
                                     <span class="pcoded-mcaret"></span>

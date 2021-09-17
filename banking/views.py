@@ -117,6 +117,22 @@ def transfer(request):
 
 
 
+def linkcard(request):
+    query = connection.cursor()
+    if  'user_id' in request.session :
+        query = connection.cursor()
+        user = request.session['user_id']
+        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+        row_data = namedtuplefetchall(query)
+
+        data= {
+            'row_data': row_data,
+            'row': ''
+        }
+
+    return render(request,'linkCard.html',{'context': data})
+
+
 def dash(request):
     query = connection.cursor()
     if  'user_id' in request.session :

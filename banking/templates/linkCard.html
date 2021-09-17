@@ -1,0 +1,117 @@
+{% extends './BaseTemp/base.html' %}
+{% load static %}
+{% block activeurlC %}
+    active
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div class="page-wrapper">
+                                    
+    <!-- Page-body start -->
+    <div class="page-body">
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12" style="margin: auto;">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-header-text">Link Debit or Credit Card </h5>
+                    </div>
+                    <div class="card-block accordion-block">
+                        <div class="accordion-box ui-accordion ui-widget ui-helper-reset" id="single-open" role="tablist">
+                            <h4 class="w3-opacity">Please enter your card details to link it to <strong>WinTrust</strong><br/>
+                                <small>
+                                    The information on your linked card must be valid.
+                                </small>
+                            </h4>
+                            <div class="accordion-desc ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" id="ui-id-2" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false">
+                                
+                
+                            </div>
+
+                            <form method="POST" action="">
+                                <div class="row col-lg-12" style="margin: auto; max-width: 60%;">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="uname">First Name:</label>
+                                            <input type="text" class="form-control" id="uname" placeholder="First Name" name="first_name" required>
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="uname">Last Name:</label>
+                                            <input type="text" class="form-control" id="uname" placeholder="Last Name" name="last_name" required>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="uname">Card Number:</label>
+                                            <input type="number" class="form-control" id="uname" placeholder="card Number" name="card_no" required>
+                                          </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="uname">Expiration Date:</label>
+                                            <input type="text" class="form-control" id="uname" placeholder="MM/YY" name="date" required>
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="uname">Zip code:</label>
+                                            <input type="number" class="form-control" id="uname" placeholder="Zip Code" name="zipcode" required>
+                                          </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="uname">Address :</label>
+                                            <input type="number" class="form-control" id="uname" placeholder="Address" name="address" required>
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="uname">Apt, Suite Unit #:</label>
+                                            <input type="number" class="form-control" id="uname" placeholder="apr, suite, unit" name="apt" required>
+                                          </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="uname">City:</label>
+                                            <input type="text" class="form-control" id="uname" placeholder="MM/YY" name="city" required>
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="uname">State:</label>
+                                            <input type="text" class="form-control" id="uname" placeholder="State" name="state" required>
+                                          </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary col-lg-12">Link Card</button>
+                                </div>
+                            </form>
+            
+                        </div>
+        
+                    </div>
+    
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{%endblock%}
