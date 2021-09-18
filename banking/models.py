@@ -24,4 +24,17 @@ class Transaction(models.Model):
     user_id = models.CharField(max_length=255)
 
 
+class CardDetails(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    card_number = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    apt_unit = models.CharField(max_length=255)
+    expiry_date = models.CharField(max_length=255)
+    zip_code = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    user_id = models.CharField(max_length=255)
+
+
 

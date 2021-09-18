@@ -27,13 +27,17 @@
                                 <small>
                                     The information on your linked card must be valid.
                                 </small>
+                                {% for content in context.other %}
+                                    <h5 class="bg-primary w3-card">{{content}}</h5>
+                                {%endfor%}
                             </h4>
                             <div class="accordion-desc ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" id="ui-id-2" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false">
                                 
                 
                             </div>
 
-                            <form method="POST" action="">
+                            <form method="POST" action="{% url 'linkcard' %}">
+                                {% csrf_token %}
                                 <div class="row col-lg-12" style="margin: auto; max-width: 60%;">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -73,13 +77,13 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="uname">Address :</label>
-                                            <input type="number" class="form-control" id="uname" placeholder="Address" name="address" required>
+                                            <input type="text" class="form-control" id="uname" placeholder="Address" name="address" required>
                                           </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="uname">Apt, Suite Unit #:</label>
-                                            <input type="number" class="form-control" id="uname" placeholder="apr, suite, unit" name="apt" required>
+                                            <input type="text" class="form-control" id="uname" placeholder="apr, suite, unit" name="apt" required>
                                           </div>
                                     </div>
 
@@ -88,7 +92,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="uname">City:</label>
-                                            <input type="text" class="form-control" id="uname" placeholder="MM/YY" name="city" required>
+                                            <input type="text" class="form-control" id="uname" placeholder="city" name="city" required>
                                           </div>
                                     </div>
                                     <div class="col-lg-6">

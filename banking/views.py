@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest, response
 from home.models import Register
 from django.db import connection, transaction
-from .models import Security,Beneficiary, Transaction
+from .models import Security,Beneficiary, Transaction, CardDetails
 
 import smtplib
 from email.message import EmailMessage
@@ -120,17 +120,45 @@ def transfer(request):
 def linkcard(request):
     query = connection.cursor()
     if  'user_id' in request.session :
-        query = connection.cursor()
         user = request.session['user_id']
-        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
-        row_data = namedtuplefetchall(query)
+        if 'card_no' in request.POST:
+            Save_card = CardDetails()
+            Save_card.first_name = request.POST['first_name']
+            Save_card.last_name = request.POST['last_name']
+            Save_card.address = request.POST['address']
+            Save_card.apt_unit = request.POST['apt']
+            Save_card.card_number = request.POST['card_no']
+            Save_card.expiry_date = request.POST['date']
+            Save_card.city = request.POST['city']
+            Save_card.state = request.POST['state']
+            Save_card.user_id = user
+            Save_card.zip_code = request.POST['zipcode']
+            Save_card.save()
+            other=[
+                'Card Added Successffully, Your Dashboard will be updated Soon.'
+            ]
+            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            row_data = namedtuplefetchall(query)
 
-        data= {
-            'row_data': row_data,
-            'row': ''
-        }
+            data= {
+                'row_data': row_data,
+                'row': '',
+                'other': other
+            }
 
-    return render(request,'linkCard.html',{'context': data})
+            return render(request,'linkCard.html',{'context': data})
+        else:
+            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            row_data = namedtuplefetchall(query)
+
+            data= {
+                'row_data': row_data,
+                'row': '',
+                'other': ''
+            }
+            return render(request,'linkCard.html',{'context': data})
+    else:
+        return render(request,'signin.html')
 
 
 def dash(request):
