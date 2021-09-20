@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'banking.apps.BankingConfig',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
