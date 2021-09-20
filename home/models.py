@@ -12,7 +12,7 @@ class Register(models.Model):
     zip = models.CharField(max_length=255)
     account_No = models.CharField(max_length=255, default='673872394219')
     routine = models.CharField(max_length=255, default='071925444')
-    balance = models.FloatField(max_length=255)
+    balance = models.CharField(max_length=255)
     userid = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     

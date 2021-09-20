@@ -22,16 +22,81 @@
                     <div class="card-header">
                         <h5 class="card-header-text">Account Number: {{user.account_No}} </h5>
                         <p style="float: right;">Available Balance : <span><strong>${{user.balance}}</strong></span></p>
-
+                        {%endfor%}
                     </div>
                     <div class="card-block accordion-block">
                         <div class="accordion-box ui-accordion ui-widget ui-helper-reset" id="single-open" role="tablist">
                             <a class="accordion-msg waves-effect waves-dark scale_active ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons" role="tab" id="ui-id-1" aria-controls="ui-id-2" aria-selected="true" aria-expanded="true" tabindex="0"><span class="ui-accordion-header-icon ui-icon zmdi zmdi-chevron-up"></span>Transaction History</a>
                             <div class="accordion-desc ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" id="ui-id-2" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false">
-                                <p>
-                                    <small>No transaction</small>
-                                </p>
+                                <div class="col-lg-12">
+                                    <div class="card table-card">
+                                        <div class="card-header">
+                                            <h5> Showing recent Transactions</h5>
+                                            <div class="card-header-right">
+                                                <ul class="list-unstyled card-option">
+                                                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                                                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                    <li><i class="fa fa-minus minimize-card"></i></li>
+                                                    <li><i class="fa fa-refresh reload-card"></i></li>
+                                                    <li><i class="fa fa-trash close-card"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card-block">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Transaction Date</th>
+                                                        <th>Beneficiary</th>
+                                                        <th>Transaction Type</th>
+                                                        <th>Amount($)</th>
+                                                        <th class="text-right">Status</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                {% for user in context.row %}    
+                                                    <tr>
+    
+                                                        <td>
+                                                            <div class="chk-option">
+                                                                <div class="checkbox-fade fade-in-primary">
+                                                                    <label class="check-task">
+                                                                        <input type="checkbox" value="">
+                                                                        <span class="cr">
+                                                                                    <i class="cr-icon fa fa-check txt-default"></i>
+                                                                                </span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            {{user.trans_date}}
+                                                        </td>
+                                                        <td>{{user.name}}</td>
+                                                        <td>{{user.transcation_type}}</td>
+                                                        <td>{{user.amount}}</td>
+    
+                                                        <td class="text-right"><label class="label label-success">Successful</label></td>
+                                                    </tr>
+                                                    {%endfor%}
+                                                    </tbody>
+                                                </table>
+                                                <div class="text-right m-r-20">
+                                                    <a href="#!" class=" b-b-primary text-primary">View all Transaction</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- start-->
+
+
+                            
+
+
+
+                            <!--stop-->
                             
                             
                         </div>
@@ -119,5 +184,5 @@
 </div>
 <!-- Page-body end -->
 </div>
-{%endfor%}
+
 {%endblock%}

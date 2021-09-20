@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'banking.apps.BankingConfig',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware'
 ]
 
 ROOT_URLCONF = 'wintrust.urls'

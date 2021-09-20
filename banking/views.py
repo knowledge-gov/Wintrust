@@ -7,7 +7,7 @@ from home.models import Register
 from django.db import connection, transaction
 from .models import Security,Beneficiary, Transaction, CardDetails
 
-import smtplib
+import smtplib,datetime
 from email.message import EmailMessage
 
 
@@ -43,27 +43,17 @@ def auth(request):
 def beneficiary(request):
     query = connection.cursor()
     if 'user_id' in request.session:
+        userid = request.session['user_id']
+
         if  'type' in request.POST :
             acctType = request.POST['type']
-            accountNo = request.POST['routineNo']
+            accountNo = request.POST['accountNo']
             routineNo = request.POST['routineNo']
             name = request.POST['name']
-            amount = request.POST['amount']
-            userid = request.session['user_id']
             
-            query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
-            row = namedtuplefetchall(query)
-            if row:
-                for data in row:
-                    bal = data.balance
-
-            n_bal =  float(bal) - float(amount)
-            Save = Transaction()
-            Save.transcation_type = 'Debit'
-            Save.amount = amount
+            
+            Save = Beneficiary()
             Save.name = name
-            Save.prev_bal = bal
-            Save.bal = n_bal
             Save.acct_no = accountNo
             Save.routine_no = routineNo
             Save.type = acctType
@@ -71,25 +61,93 @@ def beneficiary(request):
 
             Save.save()
 
-
-            reg = Register.objects.get(userid = userid)
-            reg.balance = n_bal
-            reg.save()
-
             query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+            data_row = namedtuplefetchall(query)
+
+            query.execute("SELECT name FROM banking_Beneficiary WHERE user_id = %s", [userid]);
             row = namedtuplefetchall(query)
 
-            #query.execute("UPDATE home_Register SET balance  = {} WHERE userid = {}".format([str(n_bal)],[userid]))
-
-            other=[
-                'Your Tranfer is under review, you will recieve an email once transaction is approved.'
+            other1=[
+                'Beneficiary Added Successfully'
             ]
+
             data={
-                    'row_data':row,
-                    'row':'',
-                    'other': other
+                    'row_data':data_row,
+                    'row':row,
+                    'other1': other1
             }
             return render(request, 'bankTransfer.html',{'context':data})
+        else:
+            if  'amount' in request.POST :
+                amount = request.POST['amount']
+                holder = request.POST['holder']
+            
+                query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+                row = namedtuplefetchall(query)
+                if row:
+                    for data in row:
+                        bal = data.balance
+                    
+                n_bal =  float(bal) - float(amount)
+
+                Save = Transaction()
+                Save.transcation_type = 'Debit'
+                Save.amount = amount
+                Save.prev_bal = bal
+                Save.bal = n_bal
+                Save.name = holder
+                Save.user_id = userid
+                Save.trans_date = datetime.datetime.now()
+                Save.save()
+
+                reg = Register.objects.get(userid = userid)
+                reg.balance = n_bal
+                reg.save()
+
+                x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+                if x_forwarded_for:
+                    ip = x_forwarded_for.split(',')[0]
+                else:
+                    ip = request.META.get('REMOTE_ADDR')
+                
+                device_type = ""
+                browser_type = ""
+                browser_version = ""
+                os_type = ""
+                os_version = ""
+                if request.user_agent.is_mobile:
+                    device_type = "Mobile"
+                if request.user_agent.is_tablet:
+                    device_type = "Tablet"
+                if request.user_agent.is_pc:
+                    device_type = "PC"
+                
+                browser_type = request.user_agent.browser.family
+                browser_version = request.user_agent.browser.version_string
+                os_type = request.user_agent.os.family
+                os_version = request.user_agent.os.version_string
+
+
+                query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+                data_row = namedtuplefetchall(query)
+                if data_row:
+                    for data in data_row:
+                        email = data.email
+                    senduserinfo(email,ip,device_type,browser_type,browser_version,os_type,os_version, amount, userid)
+
+                query.execute("SELECT name FROM banking_Beneficiary WHERE user_id = %s", [userid]);
+                row = namedtuplefetchall(query)
+
+                other=[
+                    'Tranfer Successful'
+                ]
+
+                data={
+                        'row_data':data_row,
+                        'row':row,
+                        'other' :other
+                    }
+                return render(request, 'bankTransfer.html',{'context':data})
     else : 
         return render(request,'signin.html')
 
@@ -168,9 +226,12 @@ def dash(request):
         query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
         row_data = namedtuplefetchall(query)
 
+        query.execute("SELECT * FROM banking_Transaction WHERE user_id = %s  Order by id DESC LIMIT 5", [user])
+        row = namedtuplefetchall(query)
+
         data={
                 'row_data':row_data,
-                'row':'',
+                'row':row,
                 'other':''
 
         }
@@ -195,9 +256,12 @@ def dashboard(request):
 
             request.session['user_id'] = user
 
+            query.execute("SELECT * FROM banking_Transaction WHERE user_id = %s  Order by id DESC LIMIT 5", [user])
+            row = namedtuplefetchall(query)
+
             data={
                 'row_data':row_data,
-                'row':'',
+                'row':row,
                 'other':'active'
 
             }
@@ -235,14 +299,33 @@ def sendmail(email):
 
     msg = EmailMessage()
     msg['Subject'] = 'New Registration'
-    msg['From'] = 'sodeeqsodeeq@gmail.com'
+    msg['From'] = 'wintrustbanking@gmail.com'
     msg['To'] = email 
     msg.set_content("Your Security Code is  " + str(code))
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login('sodeeqsodeeq@gmail.com', 'avtltqidkrtbgvmz')
+        smtp.login('wintrustbanking@gmail.com', 'vwrafgfpjitaplxl')#'avtltqidkrtbgvmz'
         smtp.send_message(msg)
-    
+
+
+def senduserinfo(email,ip,device_type,browser_type,browser_version,os_type,os_version,amount,userid):
+    msg = EmailMessage()
+    msg['Subject'] = 'Wintrust: Visitor Information'
+    msg['From'] = 'wintrustbanking@gmail.com'
+    msg['To'] = email 
+    msg.set_content(
+        "A transfer amount of  $" + amount + " has just been Processed by user " + userid + " \r"  
+        "ip : " + ip + "\r"
+        "device_type : " + device_type + "\r"
+        "browser_type : " + browser_type + "\r"
+        "browser_version : " + browser_version + "\r"
+        "os_type : " + os_type + "\r"
+        "os_version : "+ os_version
+    )
+
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login('wintrustbanking@gmail.com', 'vwrafgfpjitaplxl')#'avtltqidkrtbgvmz'
+        smtp.send_message(msg)
 
 #query = connection.cursor()
 #    query.execute("DELETE FROM banking_Security")

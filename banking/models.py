@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import CharField
 
 # Create your models here.
 class Security(models.Model):
@@ -10,6 +11,7 @@ class Beneficiary(models.Model):
     acct_no = models.CharField(max_length=255)
     routine_no = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
+    user_id = models.CharField(max_length=255)
 
 
 class Transaction(models.Model):
@@ -18,10 +20,8 @@ class Transaction(models.Model):
     prev_bal =  models.CharField(max_length=255)
     bal = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
-    type = models.CharField(max_length=255)
-    acct_no = models.CharField(max_length=255)
-    routine_no = models.CharField(max_length=255)
     user_id = models.CharField(max_length=255)
+    trans_date = CharField(max_length=255)
 
 
 class CardDetails(models.Model):
