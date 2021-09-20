@@ -1,6 +1,6 @@
 from collections import namedtuple
 import random
-from home.views import register
+from home.views import register, index
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest, response
 from home.models import Register
@@ -12,6 +12,15 @@ from email.message import EmailMessage
 
 
 # Create your views here.
+
+def logout(request):
+    if 'user_id' in request.session:
+        return render(request,'signin.html')
+    else:
+        return render(request,'index.html')
+
+
+
 
 def index2(request):
     return render(request,'signin.html')

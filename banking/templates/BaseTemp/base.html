@@ -179,7 +179,7 @@
                                       <li class="more-details">
                                          <!-- <a href="user-profile.html"><i class="ti-user"></i>View Profile</a>
                                           <a href="#!"><i class="ti-settings"></i>Settings</a>-->
-                                          <a href="auth-normal-sign-in.html"><i class="ti-layout-sidebar-left"></i>Logout</a>
+                                          <a href="{% url 'logout' %}"><i class="ti-layout-sidebar-left"></i>Logout</a>
                                       </li>
                                   </ul>
                               </div>
@@ -279,7 +279,7 @@
                               </li>-->
 
                               <li>
-                                <a href="map-google.html" class="waves-effect waves-dark">
+                                <a href="{% url 'logout' %}" class="waves-effect waves-dark">
                                     <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Log Out</span>
                                     <span class="pcoded-mcaret"></span>
