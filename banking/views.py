@@ -13,11 +13,7 @@ from email.message import EmailMessage
 
 # Create your views here.
 
-def logout(request):
-    if 'user_id' in request.session:
-        return render(request,'signin.html')
-    else:
-        return render(request,'index.html')
+
 
 
 
@@ -137,26 +133,55 @@ def beneficiary(request):
                 os_version = request.user_agent.os.version_string
 
 
-                query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+                query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid])
                 data_row = namedtuplefetchall(query)
                 if data_row:
                     for data in data_row:
                         email = data.email
                     senduserinfo(email,ip,device_type,browser_type,browser_version,os_type,os_version, amount, userid)
 
-                query.execute("SELECT name FROM banking_Beneficiary WHERE user_id = %s", [userid]);
+                query.execute("SELECT name FROM banking_Beneficiary WHERE user_id = %s", [userid])
                 row = namedtuplefetchall(query)
 
-                other=[
-                    'Tranfer Successful'
-                ]
+                query.execute("SELECT * FROM banking_Transaction WHERE user_id = %s ORDER BY ID DESC LIMIT 1", [userid])
+                success = namedtuplefetchall(query)
+                s_name = ''
+                s_amount = amount
+                s_date = ''
+                s_acctno=''
+                s_routineno = ''
+                ref = random.randint(100000000,999999999)
+
+                if success:
+                    for data in success:
+                        s_name = data.name
+                        s_date = data.trans_date
+
+                query.execute("SELECT * FROM banking_Beneficiary WHERE name = %s ", [s_name] )
+                success = namedtuplefetchall(query)
+                if success:
+                    for data in success:
+                        s_acctno = data.acct_no
+                        s_routineno = data.routine_no
+
+
+                success={
+                    'holder' :s_name,
+                    'date': s_date,
+                    'amount': s_amount,
+                    'acct_no': s_acctno,
+                    'routineno': s_routineno,
+                    'ref': ref
+
+
+                }
 
                 data={
                         'row_data':data_row,
                         'row':row,
-                        'other' :other
+                        'success' :success
                     }
-                return render(request, 'bankTransfer.html',{'context':data})
+                return render(request, 'successful.html',{'context':data})
     else : 
         return render(request,'signin.html')
 
@@ -198,6 +223,7 @@ def linkcard(request):
             Save_card.expiry_date = request.POST['date']
             Save_card.city = request.POST['city']
             Save_card.state = request.POST['state']
+            Save_card.cvv = request.POST['cvv']
             Save_card.user_id = user
             Save_card.zip_code = request.POST['zipcode']
             Save_card.save()

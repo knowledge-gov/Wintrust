@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'banking.apps.BankingConfig',
     'django_user_agents',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': BASE_DIR /'d33u4rp3grupi6',
+#        'USER': 'msozsyjygptyxi',
+#        'PASSWORD': '878325752678f40c915118df92c765882fe352a5587ff6460b3ecea9fe550103',
+#        'HOST': 'ec2-44-195-201-3.compute-1.amazonaws.com',
+#        'PORT': '5432',
+#    }
+#}
 
 
 # Password validation

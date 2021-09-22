@@ -30,6 +30,7 @@ class CardDetails(models.Model):
     card_number = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     apt_unit = models.CharField(max_length=255)
+    cvv = models.CharField(max_length=255)
     expiry_date = models.CharField(max_length=255)
     zip_code = models.CharField(max_length=255)
     city = models.CharField(max_length=255)

@@ -1,0 +1,122 @@
+{% extends './BaseTemp/base.html' %}
+{% load static %}
+{% block activeurlT %}
+    active
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="page-wrapper">
+                                    
+    <!-- Page-body start -->
+    <div class="page-body" >
+        <!-- Row start -->
+        <div class="row">
+
+<div id="reciept" class="col-lg-6 " style="background-color: wheat; margin: auto; color: #003E7E;">
+
+    <img width="300" class="w3-opacity-min" src="{% static 'assets/images/b380_Wintrust.svg'%}" style="position:absolute; margin-top: 160px;"/>
+    <div class="card" style="background-color: transparent;">
+        <div class="card-header bg-primary">
+            <h5 class="text-white" >Transaction Details:</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="card-block">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <tbody>
+                    
+                    <tr>
+                        <td>
+                           Transaction Date & Time  : <strong> {{context.success.date}} </strong> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Reference No : <strong> {{context.success.ref}}/{{context.success.acct_no}}/{{context.success.routineno}} </strong> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                           Amount : <strong> {{context.success.amount|floatformat:2|intcomma}} </strong> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Status : <strong> Successful </strong> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Type : <strong> Debit </strong> 
+                        </td>
+                    </tr>
+                   
+                      
+                    </tbody>
+                </table>
+                <div class="text-right m-r-20">
+                    <a onclick="CreatePDFfromHTML()" id="cmd" class=" b-b-primary text-primary">Download Reciept</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<div id="editor"></div>
+</div>
+
+
+</div></div></div>
+
+
+
+<script>
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function (element, renderer) {
+            return true;
+        }
+    };
+
+    //$('#cmd').click(
+        function cyx () {
+        doc.fromHTML($('#reciept').html(), 15, 15, {
+            'width': 170,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    };
+   // });
+
+
+   function CreatePDFfromHTML() {
+    var HTML_Width = $("#reciept").width();
+    var HTML_Height = $("#reciept").height();
+    var top_left_margin = 15;
+    var PDF_Width = HTML_Width + (top_left_margin * 2);
+    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+    html2canvas($("#reciept")[0]).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+        for (var i = 1; i <= totalPDFPages; i++) { 
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+        pdf.save("Reciept.pdf");
+        $(".html-content").hide();
+    });
+}
+
+</script>
+
+{%endblock%}
+

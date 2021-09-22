@@ -4,6 +4,8 @@
     active
 {% endblock %}
 {% block content %}
+{% load humanize %}
+
 
 
 
@@ -21,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-header-text">Account Number: {{user.account_No}} </h5>
-                        <p style="float: right;">Available Balance : <span><strong>${{user.balance}}</strong></span></p>
+                        <p style="float: right;">Available Balance : <span><strong>${{user.balance|floatformat:2|intcomma}}</strong></span></p>
                         {%endfor%}
                     </div>
                     <div class="card-block accordion-block">
@@ -73,13 +75,17 @@
                                                         </td>
                                                         <td>{{user.name}}</td>
                                                         <td>{{user.transcation_type}}</td>
-                                                        <td>{{user.amount}}</td>
+                                                        <td>{{user.amount|floatformat:2|intcomma}}</td>
     
                                                         <td class="text-right"><label class="label label-success">Successful</label></td>
+                                                        
                                                     </tr>
+                                                    
+                                                    
                                                     {%endfor%}
                                                     </tbody>
                                                 </table>
+                                                
                                                 <div class="text-right m-r-20">
                                                     <a href="#!" class=" b-b-primary text-primary">View all Transaction</a>
                                                 </div>
@@ -90,6 +96,9 @@
                             </div>
 
                             <!-- start-->
+
+
+                            
 
 
                             
@@ -185,4 +194,11 @@
 <!-- Page-body end -->
 </div>
 
+<script>
+    function increment(){
+      const el = document.getElementById('p-1')
+      let nv = parseFloat(el.innerText)
+      el.innerText = nv+1
+    }
+</script>
 {%endblock%}
