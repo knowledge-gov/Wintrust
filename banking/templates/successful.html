@@ -32,8 +32,6 @@
     <img width="300" class="w3-opacity-min" src="{% static 'assets/images/b380_Wintrust.svg'%}" style="position:absolute; margin-top: 160px;"/>
     <div class="card" style="background-color: transparent;">
         
-        
-        
         <div class="card-header bg-primary">
             <h5 class="text-white" >Transaction Details:</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -43,20 +41,39 @@
             <div class="table-responsive">
                 <table class="table table-hover">
                     <tbody>
-                    
+                        <tr>
+                            <td>
+                                Transaction Type : <strong>Inter-Bank Transfer (Debit) </strong> 
+                            </td>
+                        </tr>
+
                     <tr>
                         <td>
-                           Transaction Date & Time  : <strong> {{context.success.date}} </strong> 
+                           Transaction Date : <strong> {{context.success.date}} </strong> 
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>
+                           Debit Account : <strong> {{context.success.acct_no_debit}} </strong> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                           Credit Account : <strong> {{context.success.acct_no}} </strong> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                           Beneficiary : <strong> {{context.success.holder}} </strong> 
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>
                             Reference No : <strong> {{context.success.ref}}/{{context.success.acct_no}}/{{context.success.routineno}} </strong> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                           Amount : <span class="w3-text-green" style="font-size:medium;">{{context.success.amount|floatformat:2|intcomma}} </span> 
                         </td>
                     </tr>
                     <tr>
@@ -66,9 +83,11 @@
                     </tr>
                     <tr>
                         <td>
-                            Type : <strong> Debit </strong> 
+                           Amount : <span class="w3-text-green" style="font-size:medium;">{{context.success.amount|floatformat:2|intcomma}} </span> 
                         </td>
                     </tr>
+                    
+                    
                    
                       
                     </tbody>

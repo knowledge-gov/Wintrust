@@ -86,7 +86,9 @@ def beneficiary(request):
             if  'amount' in request.POST :
                 amount = request.POST['amount']
                 holder = request.POST['holder']
-            
+
+                acct_no_debit= ''
+
                 query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
                 row = namedtuplefetchall(query)
                 if row:
@@ -138,6 +140,7 @@ def beneficiary(request):
                 if data_row:
                     for data in data_row:
                         email = data.email
+                        acct_no_debit = data.account_No
                     senduserinfo(email,ip,device_type,browser_type,browser_version,os_type,os_version, amount, userid)
 
                 query.execute("SELECT name FROM banking_Beneficiary WHERE user_id = %s", [userid])
@@ -171,7 +174,8 @@ def beneficiary(request):
                     'amount': s_amount,
                     'acct_no': s_acctno,
                     'routineno': s_routineno,
-                    'ref': ref
+                    'ref': ref,
+                    'acct_no_debit': acct_no_debit
 
 
                 }
