@@ -4,6 +4,12 @@ import os
 import sys
 
 
+# install pymysql as mysql database driver.
+
+
+
+
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wintrust.settings')
