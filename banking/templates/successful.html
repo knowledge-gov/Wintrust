@@ -34,7 +34,7 @@
         
         <div class="card-header bg-primary">
             <h5 class="text-white" >Transaction Details:</h5>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button id="times"  type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <div class="card-block">
@@ -93,7 +93,7 @@
                     </tbody>
                 </table>
                 <div class="text-right m-r-20">
-                    <a onclick="CreatePDFfromHTML()" id="cmd" class=" b-b-primary text-primary">Download Receipt</a>
+                    <a onclick="w3.hide('#cmd'); w3.hide('#times'); CreatePDFfromHTML(); w3.show('#cmd');w3.show('#times') " id="cmd" class=" b-b-primary text-primary">Download Receipt</a>
                 </div>
             </div>
         </div>
@@ -151,6 +151,8 @@
 }
 
 </script>
+
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 
 {%endblock%}
 

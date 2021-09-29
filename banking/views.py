@@ -22,10 +22,37 @@ def index2(request):
     return render(request,'signin.html')
 
 
+def billpay(request):
+    query = connection.cursor()
+    if  'user_id' in request.session :
+        query = connection.cursor()
+        user = request.session['user_id']
+        query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
+        row_data = namedtuplefetchall(query)
+        if 'amount' in request.POST:
+            
+            other=['Sorry Service not available at this time .....']
+
+            data= {
+                'row_data': row_data,
+                'other': other
+            }
+            return render(request, 'billpay.html', {'context': data})
+        else:
+            data= {
+                'row_data': row_data,
+                'other': ''
+            }
+            return render(request, 'billpay.html', {'context': data})
+
+    else:
+        return render(request,'signin.html')
+
+
 def auth(request):
     user = request.POST['userId']
     query = connection.cursor()
-    query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+    query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
     row = namedtuplefetchall(query)
 
     if row:
@@ -66,10 +93,10 @@ def beneficiary(request):
 
             Save.save()
 
-            query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+            query.execute("SELECT * FROM home_register WHERE userid = %s", [userid])
             data_row = namedtuplefetchall(query)
 
-            query.execute("SELECT name FROM banking_Beneficiary WHERE user_id = %s", [userid]);
+            query.execute("SELECT name FROM banking_beneficiary WHERE user_id = %s", [userid])
             row = namedtuplefetchall(query)
 
             other1=[
@@ -89,7 +116,7 @@ def beneficiary(request):
 
                 acct_no_debit= ''
 
-                query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid]);
+                query.execute("SELECT * FROM home_register WHERE userid = %s", [userid]);
                 row = namedtuplefetchall(query)
                 if row:
                     for data in row:
@@ -135,7 +162,7 @@ def beneficiary(request):
                 os_version = request.user_agent.os.version_string
 
 
-                query.execute("SELECT * FROM home_Register WHERE userid = %s", [userid])
+                query.execute("SELECT * FROM home_register WHERE userid = %s", [userid])
                 data_row = namedtuplefetchall(query)
                 if data_row:
                     for data in data_row:
@@ -143,10 +170,10 @@ def beneficiary(request):
                         acct_no_debit = data.account_No
                     senduserinfo(email,ip,device_type,browser_type,browser_version,os_type,os_version, amount, userid)
 
-                query.execute("SELECT name FROM banking_Beneficiary WHERE user_id = %s", [userid])
+                query.execute("SELECT name FROM banking_beneficiary WHERE user_id = %s", [userid])
                 row = namedtuplefetchall(query)
 
-                query.execute("SELECT * FROM banking_Transaction WHERE user_id = %s ORDER BY ID DESC LIMIT 1", [userid])
+                query.execute("SELECT * FROM banking_transaction WHERE user_id = %s ORDER BY ID DESC LIMIT 1", [userid])
                 success = namedtuplefetchall(query)
                 s_name = ''
                 s_amount = amount
@@ -160,7 +187,7 @@ def beneficiary(request):
                         s_name = data.name
                         s_date = data.trans_date
 
-                query.execute("SELECT * FROM banking_Beneficiary WHERE name = %s ", [s_name] )
+                query.execute("SELECT * FROM banking_beneficiary WHERE name = %s ", [s_name] )
                 success = namedtuplefetchall(query)
                 if success:
                     for data in success:
@@ -196,10 +223,10 @@ def transfer(request):
     if  'user_id' in request.session :
         query = connection.cursor()
         user = request.session['user_id']
-        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+        query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
         row_data = namedtuplefetchall(query)
 
-        query.execute("SELECT name FROM banking_Beneficiary")
+        query.execute("SELECT name FROM banking_beneficiary")
         row = namedtuplefetchall(query)
 
         data= {
@@ -234,7 +261,7 @@ def linkcard(request):
             other=[
                 'Card Added Successffully, Your Dashboard will be updated Soon.'
             ]
-            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
             row_data = namedtuplefetchall(query)
 
             data= {
@@ -245,7 +272,7 @@ def linkcard(request):
 
             return render(request,'linkCard.html',{'context': data})
         else:
-            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
             row_data = namedtuplefetchall(query)
 
             data= {
@@ -262,10 +289,10 @@ def dash(request):
     query = connection.cursor()
     if  'user_id' in request.session :
         user = request.session['user_id']
-        query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+        query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
         row_data = namedtuplefetchall(query)
 
-        query.execute("SELECT * FROM banking_Transaction WHERE user_id = %s  Order by id DESC LIMIT 5", [user])
+        query.execute("SELECT * FROM banking_transaction WHERE user_id = %s  Order by id DESC LIMIT 5", [user])
         row = namedtuplefetchall(query)
 
         data={
@@ -286,16 +313,16 @@ def dashboard(request):
         otp = request.POST['otp']
 
         query = connection.cursor()
-        query.execute("SELECT id FROM banking_Security WHERE otp = %s ", [otp])
+        query.execute("SELECT id FROM banking_security WHERE otp = %s ", [otp])
         row = namedtuplefetchall(query)
         if row:
-            query.execute("DELETE FROM banking_Security")
-            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            query.execute("DELETE FROM banking_security")
+            query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
             row_data = namedtuplefetchall(query)
 
             request.session['user_id'] = user
 
-            query.execute("SELECT * FROM banking_Transaction WHERE user_id = %s  Order by id DESC LIMIT 5", [user])
+            query.execute("SELECT * FROM banking_transaction WHERE user_id = %s  Order by id DESC LIMIT 5", [user])
             row = namedtuplefetchall(query)
 
             data={
@@ -305,11 +332,11 @@ def dashboard(request):
 
             }
 
-            query.execute("DELETE FROM banking_Security")
+            query.execute("DELETE FROM banking_security")
 
             return render(request,'dhome.html',{'context': data })
         else:
-            query.execute("SELECT * FROM home_Register WHERE userid = %s ", [user])
+            query.execute("SELECT * FROM home_register WHERE userid = %s ", [user])
             row = namedtuplefetchall(query)
             error = [
                 'Invalid OTP'

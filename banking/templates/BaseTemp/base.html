@@ -172,9 +172,7 @@
                               <div class="main-menu-header">
                                   <img class="img-80 img-radius" src="https://spng.pngfind.com/pngs/s/535-5357481_user-account-management-circle-user-icon-blue-hd.png" alt="User-Profile-Image">
                                   <div class="user-details">
-                                      
                                       <span id="more-details">{{user.first_name}} &nbsp; {{user.last_name}} <i class="fa fa-caret-down"></i></span>
-                                       
                                     </div>
                               </div>
         
@@ -200,7 +198,7 @@
                                         </a>
                                 </li>
                             </ul>
-                          </form>
+                          
                             
                           
                          <div class="pcoded-navigation-label" data-i18n="nav.category.forms">ACCOUNTS</div>
@@ -227,7 +225,15 @@
                                       <span class="pcoded-mtext" data-i18n="nav.form-components.main">ASAP Direct Deposit</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
-                              </li>
+                                </li>
+
+                                <li class="{% block activeurlBill %} {%endblock%}">
+                                    <a href="{% url  'bill' %}" class="waves-effect waves-dark">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bill Pay</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
                               <li class="{% block activeurlC %} {%endblock%}">
                                 <a href="{% url  'linkcard' %}" class="waves-effect waves-dark">
@@ -288,7 +294,7 @@
                                     <span class="pcoded-mtext" data-i18n="nav.form-components.main">Log Out</span>
                                     <span class="pcoded-mcaret"></span>
                                 </a>
-                            </li>
+                              </li>
         
                           </ul>
         
@@ -304,7 +310,9 @@
                             <!-- Main-body start -->
                             <div class="main-body">
                                 
+                                
                                             {% block content %}
+                                            
                                             
                                             {% endblock %}
                                         
@@ -318,7 +326,8 @@
                                 <p class="font-style-content6 w3-small">Neither WinTrust, Visa U.S.A. nor any of their respective affiliates are responsible for the products or services provided by Ingo Money, Q2 Software, Plaid, or any eGift Card merchants. Partner terms and conditions apply.</p>
                                 <p class="font-style-content6 w3-small">All third-party names and logos are trademarks of their respective owners. These owners are not affiliated with WinTrust and have not sponsored or endorsed WinTrust products or services.</p>
                                 <p class="font-style-content6 w3-small">Apple, the Apple logo, and iPhone are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.</p>
-                                <p class="font-style-content6 w3-small">Google, Android and Google Play are trademarks of Google Inc., registered in the U.S. and other countries.</p></div>
+                                <p class="font-style-content6 w3-small">Google, Android and Google Play are trademarks of Google Inc., registered in the U.S. and other countries.</p>
+                            </div>
 
                         </div>
                     </div>
@@ -403,11 +412,7 @@
     <!-- custom js -->
     <script type="text/javascript" src="{% static 'assets/pages/dashboard/custom-dashboard.js' %}"></script>
     <script type="text/javascript" src="{% static 'assets/js/script.js'%} "></script>
-    <script>
-        function SubmitHome(){
-            document.getElementById("form1").submit();
-        } 
-    </script>
+    
 </body>
 
 </html>
