@@ -71,6 +71,41 @@ def auth(request):
         return render(request,'signin.html',{'error': 'The UserId supplied is not associated with any account.'})
 
 
+def review(request):
+    query = connection.cursor()
+    if 'user_id' in request.session:
+        userid = request.session['user_id']
+
+        query.execute("SELECT * FROM home_register WHERE userid = %s", [userid])
+        data_row = namedtuplefetchall(query)
+
+        if  'amount' in request.POST :
+            amount = request.POST['amount']
+            holder = request.POST['holder']
+
+            query.execute("SELECT * FROM banking_beneficiary WHERE name = %s ", [holder] )
+            success = namedtuplefetchall(query)
+            if success:
+                for data in success:
+                    s_acctno = data.acct_no
+                    s_routineno = data.routine_no
+
+
+            success={
+                'holder' :holder,
+                'amount': amount,
+                'acct_no': s_acctno,
+                'routineno': s_routineno,
+            }
+
+
+    data ={
+        'row_data':data_row,
+        'success' : success,
+
+    }
+    return render(request, 'review.html',{'context':data})
+
 
 def beneficiary(request):
     query = connection.cursor()
@@ -121,7 +156,8 @@ def beneficiary(request):
                 if row:
                     for data in row:
                         bal = data.balance
-                    
+                
+                amount  = amount.replace(',', '')
                 n_bal =  float(bal) - float(amount)
 
                 Save = Transaction()

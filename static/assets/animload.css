@@ -1,0 +1,72 @@
+.container {
+    width: 400px;
+    height: 50px;
+    position: relative;
+    border: 1px solid black;
+  }
+  
+  .progress {
+    background: #0d417e;
+    float: left;
+    color: white;
+    width: 100%;
+    height: 30px;
+    line-height: 50px;
+    animation-name: slideInFromLeft;
+    animation-duration: 30s;
+    animation-timing-function: cubic-bezier(0, .9, .9, .999);
+    text-align: center;
+  }
+  
+  .percent::before {
+    content: counter(count);
+    animation-name: counter;
+    animation-duration: 30s;
+    animation-timing-function: cubic-bezier(0, .9, .9, .999);
+    counter-reset: count 0;
+  }
+  
+  @keyframes slideInFromLeft {
+    0% {
+      width: 0%;
+    }
+    99% {
+      width: 99%;
+    }
+  }
+  
+  @keyframes counter {
+    0% {
+      counter-increment: count 0;
+    }
+    10% {
+      counter-increment: count 50;
+    }
+    20% {
+      counter-increment: count 60;
+    }
+    30% {
+      counter-increment: count 70;
+    }
+    40% {
+      counter-increment: count 80;
+    }
+    50% {
+      counter-increment: count 90;
+    }
+    60% {
+      counter-increment: count 95;
+    }
+    70% {
+      counter-increment: count 98;
+    }
+    80% {
+      counter-increment: count 99;
+    }
+    90% {
+      counter-increment: count 90;
+    }
+    100% {
+      counter-increment: count 100;
+    }
+  }

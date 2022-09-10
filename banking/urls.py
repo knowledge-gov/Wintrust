@@ -9,6 +9,7 @@ urlpatterns=[
     path('dashboardHome/', views.dash, name='dash'),
     path('transfer/',views.transfer, name = 'transfer'),
     path('processtransfer/', views.beneficiary, name= 'add_beneficiary'),
+    path('review/', views.review, name= 'review'),
     path('linkcard/', views.linkcard, name= 'linkcard'),
     path('billpay/', views.billpay, name= 'bill'),
     path('auth/',views.auth,name='auth'),
