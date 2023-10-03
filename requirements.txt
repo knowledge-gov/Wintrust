@@ -23,7 +23,7 @@ soupsieve==2.2.1
 sqlparse==0.4.1
 tzlocal==3.0
 ua-parser==0.10.0
-urllib3==1.26.6
+urllib3==1.26.17
 user-agents==2.2.0
 whitenoise==5.3.0
 python-decouple==3.4
